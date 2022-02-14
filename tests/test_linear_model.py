@@ -18,6 +18,7 @@ from icepickle.linear_model import load_coefficients, save_coefficients
 
 
 def compare_models(model1, model2, tmpdir):
+    """Checks if weights between two models can be shared."""
     clf = model1()
     pipe = make_pipeline(
         make_union(
