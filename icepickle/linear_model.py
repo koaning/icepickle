@@ -15,7 +15,12 @@ def load_coefficients(model, filename):
     """Attach the saved coefficients to a linear model."""
     with h5py.File(filename, "r") as hf:
         coef = hf["coef"][:]
-        intercept = hf["intercept"][:]
+        # Sometimes the intercept is stored as a scalar
+        # hence, we check how to retreive from h5.
+        if len(hf["intercept"].shape) != 0:
+            intercept = hf["intercept"][:]
+        else:
+            intercept = hf["intercept"][()]
         if is_classifier(model):
             classes = hf["classes"][:]
     model.coef_ = coef
