@@ -58,6 +58,10 @@ load_coefficients(clf_reloaded, 'classifier.h5')
 ```
 
 This is a lot safer and there's plenty of use-cases that could be handled this way.
+
+<details>
+    <summary><b>There's a cool finetuning-trick we can do now too!</b></summary>
+
 ## Finetuning
 
 Assuming that you use a stateless featurizer in your pipeline, such as [HashingVectorizer](https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.HashingVectorizer.html#sklearn.feature_extraction.text.HashingVectorizer) or language models from [whatlies](https://koaning.github.io/whatlies/api/language/universal_sentence/), you choose to pre-train your scikit-learn model beforehand and fine-tune it later using models that offer the `.partial_fit()`-api. If you're unfamiliar with this api, you might appreciate [this course on calmcode](https://calmcode.io/partial_fit/introduction.html).
@@ -129,4 +133,6 @@ from sklearn.linear_model import (
     PassiveAggressiveRegressor,
 )
 ```
+</details>
+
 </details>
