@@ -62,32 +62,60 @@ This is a lot safer and there's plenty of use-cases that could be handled this w
 
 Assuming that you use a stateless featurizer in your pipeline, such as [HashingVectorizer](https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.HashingVectorizer.html#sklearn.feature_extraction.text.HashingVectorizer) or language models from [whatlies](https://koaning.github.io/whatlies/api/language/universal_sentence/), you choose to pre-train your scikit-learn model beforehand and fine-tune it later using models that offer the `.partial_fit()`-api. If you're unfamiliar with this api, you might appreciate [this course on calmcode](https://calmcode.io/partial_fit/introduction.html).
 
-The script below demonstrates how the fine-tuning might be used.
+This library also comes with utilities that makes it easier to finetune systems via the `.partial_fit()` API. In particular we offer partial pipeline components via the `icepickle.pipeline` submodule.
 
 
 ```python
 import pandas as pd
 from sklearn.linear_model import SGDClassifier, LogisticRegression
-from icepickle.linear_model import save_coefficients, load_coefficients
+from sklearn.feature_extraction.text import HashingVectorizer
 
+from icepickle.linear_model import save_coefficients, load_coefficients
+from icepickle.pipeline import make_partial_pipeline
 
 url = "https://raw.githubusercontent.com/koaning/icepickle/main/datasets/imdb_subset.csv"
 df = pd.read_csv(url)
 X, y = list(df['text']), df['label']
 
 # Train a pre-trained model.
-pretrained = LogisticRegression().fit(X, y)
+pretrained = LogisticRegression()
+pipe = make_partial_pipeline(HashingVectorizer(), pretrained)
+pipe.fit(X, y)
 save_coefficients(pretrained, 'pretrained.h5')
 
 # Create a new model using pre-trained weights.
 finetuned = SGDClassifier()
 load_coefficients(finetuned, 'pretrained.h5')
+new_pipe = make_partial_pipeline(HashingVectorizer(), finetuned)
+
+# This new model can be used for fine-tuning.
+for i in range(10):
+    # Inside this for-loop you could consider doing data-augmentation.
+    new_pipe.partial_fit(X, y)
 ```
 
 <details>
-  <summary>Supported Models</summary>
+  <summary>Supported Pipeline Parts</summary>
 
-We unit test against the following models.
+The following pipeline components are added.
+
+```python
+from sklearn.icepickle import (
+    PartialPipeline
+    PartialFeatureUnion,
+    make_partial_pipeline,
+    make_partial_union,
+)
+```
+
+These tools allow you to declare pipelines that support `.partial_fit`. Note that
+components used in these pipelines all need to have `.partial_fit()` implemented.
+</details>
+
+<details>
+  <summary>Supported Scikit-Learn Models</summary>
+
+We unit test against the following models in our `save_coefficients` and `load_coefficients` functions.
 
 ```python
 from sklearn.linear_model import (
