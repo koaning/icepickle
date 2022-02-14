@@ -9,7 +9,7 @@ dev_packages = [
     "pre-commit>=2.17.0",
     "interrogate>=1.5.0",
     "black>=22.1.0",
-    "pandas>=1.4.1",
+    "pandas>=1.0.0",
 ]
 
 
