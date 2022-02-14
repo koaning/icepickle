@@ -39,7 +39,7 @@ from joblib import dump, load
 dump(clf, 'classifier.joblib')
 
 # You can load it too.
-clf = load('classifier.joblib')
+clf_reloaded = load('classifier.joblib')
 ```
 
 But this is unsafe. The scikit-learn documentations warns about the [security concerns](https://scikit-learn.org/stable/modules/model_persistence.html#security-maintainability-limitations) but also about potential compatibility issues. The goal of this package is to offer a safe alternative to pickling for simple linear models. The coefficients will be saved in a `.h5` file and an be loaded into a new regression model later.
@@ -51,19 +51,36 @@ from icepickle.linear_model import save_coefficients, load_coefficients
 save_coefficients(clf, 'classifier.h5')
 
 # You can load it too.
-clf = load_coefficients('classifier.h5')
+clf_reloaded = load_coefficients('classifier.h5')
 ```
 
 This is a lot safer and there's plenty of use-cases that could be handled this way.
 ## Finetuning
 
-Assuming that you use a stateless featurizer in your pipeline, such as [HashingVectorizer](https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.HashingVectorizer.html#sklearn.feature_extraction.text.HashingVectorizer) or language models from [whatlies](https://koaning.github.io/whatlies/api/language/universal_sentence/), you choose to pre-train your scikit-learn model beforehand and fine-tune it later using models that offer the `.partial_fit()`-api.
+Assuming that you use a stateless featurizer in your pipeline, such as [HashingVectorizer](https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.HashingVectorizer.html#sklearn.feature_extraction.text.HashingVectorizer) or language models from [whatlies](https://koaning.github.io/whatlies/api/language/universal_sentence/), you choose to pre-train your scikit-learn model beforehand and fine-tune it later using models that offer the `.partial_fit()`-api. If you're unfamiliar with this api, you might appreciate [this course on calmcode](https://calmcode.io/partial_fit/introduction.html).
 
-If you're unfamiliar with this api, you might appreciate [this course on calmcode](https://calmcode.io/partial_fit/introduction.html). Models that might be used for fine-tuning include:
+The script below demonstrates how the fine-tuning might be used.
 
-- [SGDClassifier](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.SGDClassifier.html#sklearn.linear_model.SGDClassifier)
-- [PassiveAgressiveClassifier](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.PassiveAggressiveClassifier.html#sklearn.linear_model.PassiveAggressiveClassifier).
 
-```
+```python
 
 ```
+
+<details>
+  <summary>Supported Models</summary>
+
+We unit test against the following models.
+
+```python
+from sklearn.linear_model import (
+    SGDClassifier,
+    SGDRegressor,
+    LinearRegression,
+    LogisticRegression,
+    Ridge,
+    RidgeClassifier,
+    PassiveAggressiveClassifier,
+    PassiveAggressiveRegressor,
+)
+```
+</details>
