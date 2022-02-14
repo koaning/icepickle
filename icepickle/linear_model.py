@@ -20,6 +20,7 @@ def load_coefficients(model, filename):
         if len(hf["intercept"].shape) != 0:
             intercept = hf["intercept"][:]
         else:
+            # https://github.com/h5py/h5py/issues/1779
             intercept = hf["intercept"][()]
         if is_classifier(model):
             classes = hf["classes"][:]
