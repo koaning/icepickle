@@ -81,8 +81,6 @@ from sklearn.linear_model import (
     SGDRegressor,
     LinearRegression,
     LogisticRegression,
-    Ridge,
-    RidgeClassifier,
     PassiveAggressiveClassifier,
     PassiveAggressiveRegressor,
 )

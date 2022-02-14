@@ -7,8 +7,6 @@ from sklearn.linear_model import (
     SGDRegressor,
     LinearRegression,
     LogisticRegression,
-    Ridge,
-    RidgeClassifier,
     PassiveAggressiveClassifier,
     PassiveAggressiveRegressor,
 )
@@ -65,11 +63,11 @@ def compare_models(model1, model2, tmpdir):
 
 @pytest.mark.parametrize(
     "clf_train",
-    [LogisticRegression, SGDClassifier, PassiveAggressiveClassifier, RidgeClassifier],
+    [LogisticRegression, SGDClassifier, PassiveAggressiveClassifier],
 )
 @pytest.mark.parametrize(
     "clf_target",
-    [LogisticRegression, SGDClassifier, PassiveAggressiveClassifier, RidgeClassifier],
+    [LogisticRegression, SGDClassifier, PassiveAggressiveClassifier],
 )
 def test_load_save_clf(clf_train, clf_target, tmpdir):
     """
@@ -79,10 +77,10 @@ def test_load_save_clf(clf_train, clf_target, tmpdir):
 
 
 @pytest.mark.parametrize(
-    "reg_train", [LinearRegression, SGDRegressor, PassiveAggressiveRegressor, Ridge]
+    "reg_train", [LinearRegression, SGDRegressor, PassiveAggressiveRegressor]
 )
 @pytest.mark.parametrize(
-    "reg_target", [LinearRegression, SGDRegressor, PassiveAggressiveRegressor, Ridge]
+    "reg_target", [LinearRegression, SGDRegressor, PassiveAggressiveRegressor]
 )
 def test_load_save_reg(reg_train, reg_target, tmpdir):
     """
