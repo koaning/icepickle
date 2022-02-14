@@ -97,7 +97,7 @@ for i in range(10):
 ```
 
 <details>
-  <summary>Supported Pipeline Parts</summary>
+    <summary><b>Supported Pipeline Parts</b></summary>
 
 The following pipeline components are added.
 
@@ -115,7 +115,7 @@ components used in these pipelines all need to have `.partial_fit()` implemented
 </details>
 
 <details>
-  <summary>Supported Scikit-Learn Models</summary>
+    <summary><b>Supported Scikit-Learn Models</b></summary>
 
 We unit test against the following models in our `save_coefficients` and `load_coefficients` functions.
 
