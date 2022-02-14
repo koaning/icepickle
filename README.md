@@ -63,7 +63,11 @@ The script below demonstrates how the fine-tuning might be used.
 
 
 ```python
+import pandas as pd
+from sklearn.linear_model import SGDClassifier, LogisticRegression
 
+url = "https://github.com/koaning/icepickle"
+df = pd.read_csv(url)
 ```
 
 <details>
