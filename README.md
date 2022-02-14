@@ -81,6 +81,8 @@ X, y = list(df['text']), df['label']
 pretrained = LogisticRegression()
 pipe = make_partial_pipeline(HashingVectorizer(), pretrained)
 pipe.fit(X, y)
+
+# Save the coefficients, safely.
 save_coefficients(pretrained, 'pretrained.h5')
 
 # Create a new model using pre-trained weights.
