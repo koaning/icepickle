@@ -4,10 +4,10 @@ import pathlib
 import numpy as np
 from sklearn.linear_model import (
     SGDClassifier,
+    SGDRegressor,
+    LinearRegression,
     LogisticRegression,
     PassiveAggressiveClassifier,
-    LinearRegression,
-    SGDRegressor,
     PassiveAggressiveRegressor,
 )
 from sklearn.feature_extraction.text import HashingVectorizer
@@ -62,10 +62,12 @@ def compare_models(model1, model2, tmpdir):
 
 
 @pytest.mark.parametrize(
-    "clf_train", [LogisticRegression, SGDClassifier, PassiveAggressiveClassifier]
+    "clf_train",
+    [LogisticRegression, SGDClassifier, PassiveAggressiveClassifier],
 )
 @pytest.mark.parametrize(
-    "clf_target", [LogisticRegression, SGDClassifier, PassiveAggressiveClassifier]
+    "clf_target",
+    [LogisticRegression, SGDClassifier, PassiveAggressiveClassifier],
 )
 def test_load_save_clf(clf_train, clf_target, tmpdir):
     """
