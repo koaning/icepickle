@@ -15,7 +15,7 @@ dev_packages = [
 
 setup(
     name="icepickle",
-    version="0.0.1",
+    version="0.0.2",
     packages=find_packages(exclude=["notebooks"]),
     install_requires=base_packages,
     extras_require={"dev": dev_packages},
