@@ -4,10 +4,12 @@ import pathlib
 import numpy as np
 from sklearn.linear_model import (
     SGDClassifier,
-    LogisticRegression,
-    PassiveAggressiveClassifier,
-    LinearRegression,
     SGDRegressor,
+    LinearRegression,
+    LogisticRegression,
+    Ridge,
+    RidgeClassifier,
+    PassiveAggressiveClassifier,
     PassiveAggressiveRegressor,
 )
 from sklearn.feature_extraction.text import HashingVectorizer
@@ -62,10 +64,12 @@ def compare_models(model1, model2, tmpdir):
 
 
 @pytest.mark.parametrize(
-    "clf_train", [LogisticRegression, SGDClassifier, PassiveAggressiveClassifier]
+    "clf_train",
+    [LogisticRegression, SGDClassifier, PassiveAggressiveClassifier, RidgeClassifier],
 )
 @pytest.mark.parametrize(
-    "clf_target", [LogisticRegression, SGDClassifier, PassiveAggressiveClassifier]
+    "clf_target",
+    [LogisticRegression, SGDClassifier, PassiveAggressiveClassifier, RidgeClassifier],
 )
 def test_load_save_clf(clf_train, clf_target, tmpdir):
     """
@@ -75,10 +79,10 @@ def test_load_save_clf(clf_train, clf_target, tmpdir):
 
 
 @pytest.mark.parametrize(
-    "reg_train", [LinearRegression, SGDRegressor, PassiveAggressiveRegressor]
+    "reg_train", [LinearRegression, SGDRegressor, PassiveAggressiveRegressor, Ridge]
 )
 @pytest.mark.parametrize(
-    "reg_target", [LinearRegression, SGDRegressor, PassiveAggressiveRegressor]
+    "reg_target", [LinearRegression, SGDRegressor, PassiveAggressiveRegressor, Ridge]
 )
 def test_load_save_reg(reg_train, reg_target, tmpdir):
     """
