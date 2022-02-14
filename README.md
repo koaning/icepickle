@@ -1,4 +1,4 @@
-<img src="icepickle.png" width=210 align="right">
+<img src="icepickle.png" width=175 align="right">
 
 # icepickle
 
@@ -100,8 +100,8 @@ for i in range(10):
 The following pipeline components are added.
 
 ```python
-from sklearn.icepickle import (
-    PartialPipeline
+from icepickle.pipeline import (
+    PartialPipeline,
     PartialFeatureUnion,
     make_partial_pipeline,
     make_partial_union,
