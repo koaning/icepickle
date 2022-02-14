@@ -13,6 +13,9 @@ interrogate:
 
 check: black flake interrogate test
 
+clean:
+	rm -rf *.h5
+	rm -rf *.joblib
 install:
 	python -m pip install --upgrade pip
 	python -m pip install -e ".[dev]"
