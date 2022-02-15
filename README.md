@@ -60,6 +60,23 @@ load_coefficients(clf_reloaded, 'classifier.h5')
 This is a lot safer and there's plenty of use-cases that could be handled this way.
 
 <details>
+    <summary><b>Supported Scikit-Learn Models</b></summary>
+
+We unit test against the following models in our `save_coefficients` and `load_coefficients` functions.
+
+```python
+from sklearn.linear_model import (
+    SGDClassifier,
+    SGDRegressor,
+    LinearRegression,
+    LogisticRegression,
+    PassiveAggressiveClassifier,
+    PassiveAggressiveRegressor,
+)
+```
+</details>
+
+<details>
     <summary><b>There's a cool finetuning-trick we can do now too!</b></summary>
 
 ## Finetuning
@@ -116,23 +133,6 @@ from icepickle.pipeline import (
 
 These tools allow you to declare pipelines that support `.partial_fit`. Note that
 components used in these pipelines all need to have `.partial_fit()` implemented.
-</details>
-
-<details>
-    <summary><b>Supported Scikit-Learn Models</b></summary>
-
-We unit test against the following models in our `save_coefficients` and `load_coefficients` functions.
-
-```python
-from sklearn.linear_model import (
-    SGDClassifier,
-    SGDRegressor,
-    LinearRegression,
-    LogisticRegression,
-    PassiveAggressiveClassifier,
-    PassiveAggressiveRegressor,
-)
-```
 </details>
 
 </details>
