@@ -3,7 +3,7 @@ print(
 Roses are red.
 Violets are blue.
 Linear models are simple,
-and they often work too!
+and might be enough too!
 
 Inspecting models is grand,
 understanding them makes you smart.
