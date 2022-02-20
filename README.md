@@ -88,7 +88,7 @@ This library also comes with utilities that makes it easier to finetune systems 
 
 ```python
 import pandas as pd
-from sklearn.linear_model import SGDClassifier, LogisticRegression
+from sklearn.linear_model import SGDClassifier
 from sklearn.feature_extraction.text import HashingVectorizer
 
 from icepickle.linear_model import save_coefficients, load_coefficients
@@ -99,7 +99,7 @@ df = pd.read_csv(url)
 X, y = list(df['text']), df['label']
 
 # Train a pre-trained model.
-pretrained = LogisticRegression()
+pretrained = SGDClassifier(loss="log")
 pipe = make_partial_pipeline(HashingVectorizer(), pretrained)
 pipe.fit(X, y)
 
@@ -107,7 +107,7 @@ pipe.fit(X, y)
 save_coefficients(pretrained, 'pretrained.h5')
 
 # Create a new model using pre-trained weights.
-finetuned = SGDClassifier()
+finetuned = SGDClassifier(loss="log")
 load_coefficients(finetuned, 'pretrained.h5')
 new_pipe = make_partial_pipeline(HashingVectorizer(), finetuned)
 
