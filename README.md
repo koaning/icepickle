@@ -107,7 +107,7 @@ pipe.fit(X, y)
 save_coefficients(pretrained, 'pretrained.h5')
 
 # Create a new model using pre-trained weights.
-finetuned = SGDClassifier(loss="log")
+finetuned = SGDClassifier(loss="log_loss")
 load_coefficients(finetuned, 'pretrained.h5')
 new_pipe = make_partial_pipeline(HashingVectorizer(), finetuned)
 
