@@ -1,6 +1,6 @@
 <img src="icepickle.png" width=175 align="right">
 
-# icepickle
+### icepickle
 
 > It's a cooler way to store simple linear models.
 
